@@ -28,17 +28,25 @@ void PrintArray(int[,] array)
 
 int[,] NewArray(int[,] array)
 {
-    int count = 0;
+    // Мой способ:
+    // 
+    // int count = 0;
+    // for (int i = 0; i < array.GetLength(0); i++)
+    // {
+    //     for (int j = count; j < array.GetLength(1); j++)
+    //     {
+    //         int temp = array[i, j];
+    //         array[i, j] = array[j, i];
+    //         array[j, i] = temp;
+    //     }
+    //     count++;
+    // }
+    //
+    // Способ на семинаре:
     for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = count; j < array.GetLength(1); j++)
-        {
-            int temp = array[i, j];
-            array[i, j] = array[j, i];
-            array[j, i] = temp;
-        }
-        count++;
-    }
+        for (int j = i; j < array.GetLength(1); j++)
+            (array[i, j], array[j, i]) = (array[j, i], array[i, j]);
+
     return array;
 }
 
