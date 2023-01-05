@@ -117,6 +117,48 @@ void CheckAndPrint(int[] array) // Второй метод, однако нео�
     }
 }
 
+int Check_Max(int[,] array)
+{
+    int max = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (array[i, j] > max) max = array[i, j];
+        }
+    }
+    return max;
+}
+
+void Check2(int[,] array, int max)
+{
+    int[] temp = new int[max];
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            temp[array[i, j]] += 1;
+        }
+    }
+    for (int count = 0; count <= max; count++)
+    {
+        if (temp[count] != 0)
+        {
+            Console.Write($"Число {count} встречается {temp[count]} ");
+            if (temp[count] < 2 || temp[count] > 4)
+            {
+                Console.Write("раз");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.Write("раза");
+                Console.WriteLine();
+            }
+        }
+    }
+}
+
 Console.WriteLine("Введите количество строк двумерного массива:");
 int rows = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите количество столбцов двумерного массива");
@@ -125,6 +167,11 @@ int[,] array = new int[rows, cols];
 FillArray(array);
 Console.WriteLine($"Сгенерирован массив из {array.GetLength(0)} строк и {array.GetLength(1)} столбцов:");
 PrintArray(array);
+int max = Check_Max(array);
+Console.WriteLine();
 Check(array);
+Console.WriteLine();
 PrintArray2(Check1(array));
 CheckAndPrint(Check1(array));
+Console.WriteLine();
+Check2(array, max);
